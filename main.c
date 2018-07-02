@@ -73,28 +73,26 @@ char* route(char* url){
 	char* error();
 	char* todo(int);
 	int event = -1;
-	if(strcasecmp(url, "/") == 0)
-		return home();
-	else if(strcasecmp(url, "/1") == 0)
-		return todo(1);
-	else if(strcasecmp(url, "/2") == 0)
-		return todo(2);
-	else if(strcasecmp(url, "/3") == 0)
-		return todo(3);
-	else if(strcasecmp(url, "/4") == 0)
-		return todo(4);
-	else
-		return error();
+	if(strcasecmp(url, "/") == 0)return home();
+	else if(strcasecmp(url, "/1") == 0)return todo(1);
+	else if(strcasecmp(url, "/2") == 0)return todo(2);
+	else if(strcasecmp(url, "/3") == 0)return todo(3);
+	else if(strcasecmp(url, "/4") == 0)return todo(4);
+	else return error();
 }
 
-char* home(){
-	return "hello";
-}
+char* home(){ return "hello"; }
 
-char* error(){
-	return "error";
-}
+char* error(){ return "error"; }
 
 char* todo(int item){
-	return "data";
+	// 不采用数组或者malloc是为了不增加复杂度
+	char *data1 = "data : 1", *data2 = "data : 2",
+		*data3 = "data : 3", *data4 = "data : 4";
+	switch(item){
+		case 1: return data1;
+		case 2: return data2;
+		case 3: return data3;
+		case 4: return data4;
+	}
 }
