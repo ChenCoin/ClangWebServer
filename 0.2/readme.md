@@ -11,6 +11,7 @@
 将404.html转换为404.html.c，命令为：./tool 404.html
 
 静态编译：gcc main.c -static -o app
+
 运行：./app 8080
 
 ![运行结果](https://github.com/ChenCoin/DarkHunter/blob/master/0.2/screenshot.png)
