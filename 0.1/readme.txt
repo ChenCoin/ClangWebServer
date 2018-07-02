@@ -8,4 +8,4 @@ main.c 是一个Clang的web服务器的基本框架，仅用不到100行代码�
 
 编译：gcc main.c -static -o app
 
-运行：./app
+运行：./app 8080
