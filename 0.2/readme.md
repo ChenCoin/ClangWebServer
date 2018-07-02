@@ -6,8 +6,8 @@
 
 编译：gcc tool.c -static -o tool
 
-网页转换：
-将index.html转换为index.html.c，命令为：./tool index.html
+网页转换：  
+将index.html转换为index.html.c，命令为：./tool index.html  
 将404.html转换为404.html.c，命令为：./tool 404.html
 
 静态编译：gcc main.c -static -o app
