@@ -13,4 +13,4 @@
 静态编译：gcc main.c -static -o app
 运行：./app 8080
 
-![image][screenshot.png]
+![运行结果][https://github.com/ChenCoin/DarkHunter/blob/master/0.2/screenshot.png]
