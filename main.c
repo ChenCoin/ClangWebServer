@@ -11,12 +11,10 @@ int main(int argc, char **argv){
 	int PORT;
 	(argc == 2) ?: errorExit("need a port\n");
 	PORT = atoi(argv[1]);
-	
 	int createServer(int);
 	int handle(int);
 	int server = createServer(PORT);
 	handle(server);
-
 	return 0;
 }
 
@@ -53,64 +51,50 @@ int handle(int serverfd){
 		sscanf(buffer,"%s %s", method, url);
 		printf("receive uri:%s\n\n", url);
 
-		int route(int, char*);
-		if(strcasecmp(method, "GET") == 0)
-			route(client_fd,url);
+		char* route(char*);
+		if(strcasecmp(method, "GET") == 0){
+			char* data = route(url);
+			char response[128];
+			sprintf(response, "HTTP/1.0 200 OK\r\n");
+			sprintf(response,"%sContent-length: %ld\r\n",
+				response,strlen(data));
+			sprintf(response,"%sContent-type: %s\r\n\r\n",
+				response,"text/html");
+			write(client_fd, response, strlen(response));
+			write(client_fd, data, strlen(data));
+		}
 		close(client_fd);
 	}
 	return 0;
 }
 
-int route(int client, char* url){
-	int home(int);
-	int error(int);
-	int todo(int, int);
+char* route(char* url){
+	char* home();
+	char* error();
+	char* todo(int);
 	int event = -1;
-	if(strcasecmp(url, "/") == 0)home(client);
-	else if(strcasecmp(url, "/1") == 0)todo(client, 1);
-	else if(strcasecmp(url, "/2") == 0)todo(client, 2);
-	else if(strcasecmp(url, "/3") == 0)todo(client, 3);
-	else if(strcasecmp(url, "/4") == 0)todo(client, 4);
-	else error(client);
-	return 0;
+	if(strcasecmp(url, "/") == 0)
+		return home();
+	else if(strcasecmp(url, "/1") == 0)
+		return todo(1);
+	else if(strcasecmp(url, "/2") == 0)
+		return todo(2);
+	else if(strcasecmp(url, "/3") == 0)
+		return todo(3);
+	else if(strcasecmp(url, "/4") == 0)
+		return todo(4);
+	else
+		return error();
 }
 
-int home(int client){
-	char* data = "hello";
-	char response[128];
-	sprintf(response, "HTTP/1.0 200 OK\r\n");
-	sprintf(response,"%sContent-length: %ld\r\n",
-		response,strlen(data));
-	sprintf(response,"%sContent-type: %s\r\n\r\n",
-		response,"text/html");
-	write(client, response, strlen(response));
-	write(client, data, strlen(data));
-	return 0;
+char* home(){
+	return "hello";
 }
 
-int error(int client){
-	char* data = "error";
-	char response[128];
-	sprintf(response, "HTTP/1.0 200 OK\r\n");
-	sprintf(response,"%sContent-length: %ld\r\n",
-		response,strlen(data));
-	sprintf(response,"%sContent-type: %s\r\n\r\n",
-		response,"text/html");
-	write(client, response, strlen(response));
-	write(client, data, strlen(data));
-	return 0;
+char* error(){
+	return "error";
 }
 
-int todo(int client, int item){
-	char data[6];
-	sprintf(data, "%d", item);
-	char response[128];
-	sprintf(response, "HTTP/1.0 200 OK\r\n");
-	sprintf(response,"%sContent-length: %ld\r\n",
-		response,strlen(data));
-	sprintf(response,"%sContent-type: %s\r\n\r\n",
-		response,"text/html");
-	write(client, response, strlen(response));
-	write(client, data, strlen(data));
-	return 0;
+char* todo(int item){
+	return "data";
 }
