@@ -56,9 +56,9 @@ int handle(int serverfd){
 			char* data = route(url);
 			char response[128];
 			sprintf(response, "HTTP/1.0 200 OK\r\n");
-			sprintf(response,"%sContent-length: %ld\r\n",
+			sprintf(response,"%.20sContent-length: %ld\r\n",
 				response,strlen(data));
-			sprintf(response,"%sContent-type: %s\r\n\r\n",
+			sprintf(response,"%.40sContent-type: %.10s\r\n\r\n",
 				response,"text/html");
 			write(client_fd, response, strlen(response));
 			write(client_fd, data, strlen(data));
@@ -72,7 +72,6 @@ char* route(char* url){
 	char* home();
 	char* error();
 	char* todo(int);
-	int event = -1;
 	if(strcasecmp(url, "/") == 0)return home();
 	else if(strcasecmp(url, "/1") == 0)return todo(1);
 	else if(strcasecmp(url, "/2") == 0)return todo(2);
