@@ -16,12 +16,10 @@ int main(int argc, char **argv){
 		int length = strlen(text);
 		// 不考虑一行字符超过1024个的情况
 		// html文件的末尾必须有一个空行
-		text[length-1] = '\\';
-		text[length] = 'n';
-		text[length+1] = 0;
+		text[length-1] = 0;
 		char tmp[2048];
 		int point = 0;
-		for(int i=0; i<length+2; i++){
+		for(int i=0; i<length; i++){
 			if(text[i]=='\"'){
 				tmp[point] = '\\';
 				point++;
