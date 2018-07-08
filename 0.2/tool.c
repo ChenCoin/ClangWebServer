@@ -14,8 +14,10 @@ int main(int argc, char **argv){
 	while(fgets(text, 1024, source)!=NULL)
 	{
 		int length = strlen(text);
-		// 不考虑一行字符超过1024个的情况
-		// html文件的末尾必须有一个空行
+		/* 不考虑一行字符超过1024个的情况
+		 * html文件的末尾必须有一个空行
+		 * 
+		*/
 		text[length-1] = '\\';
 		text[length] = 'n';
 		text[length+1] = 0;
