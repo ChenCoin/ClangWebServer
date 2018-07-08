@@ -16,7 +16,7 @@ int main(int argc, char **argv){
 		int length = strlen(text);
 		/* 不考虑一行字符超过1024个的情况
 		 * html文件的末尾必须有一个空行
-		 * 
+		 * 在每一行的末尾添加\n，并将 " 转为 \" 
 		*/
 		text[length-1] = '\\';
 		text[length] = 'n';
